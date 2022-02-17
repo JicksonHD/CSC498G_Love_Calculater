@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView result;
     Spinner s;
 
-    int language_position;// 1 for 1st language in list 2 for 2nd...
+    int language_position;// 0 for 1st language in list 1 for 2nd...
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +43,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void calculate(View view){
 
-        ImageView language_logo = (ImageView) findViewById(R.id.imageView);
-
-
         Random rand = new Random();
-       int percentage = rand.nextInt(101);
-       String answer = Integer.toString(percentage);
-       language_position = s.getSelectedItemPosition();
+        int percentage = rand.nextInt(101);
+        String answer = Integer.toString(percentage);
+        language_position = s.getSelectedItemPosition();
+
+        ImageView language_logo = (ImageView) findViewById(R.id.imageView);
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout);
+        EditText enter_name = (EditText) findViewById(R.id.Name);
+        s = findViewById(R.id.spinner1);
+
+        TableRow tableRow = new TableRow(this);
+        TextView name = new TextView(this);
+        TextView language = new TextView(this);
+        TextView love_percentage = new TextView(this);
+
+        name.setText(enter_name.getText().toString());
+        tableRow.addView(name);
+        tableLayout.addView(tableRow);
+        String text = s.getSelectedItem().toString();
+        language.setText(text);
+
+        love_percentage.setText(answer);
+
+
 
         //language_logo.setImageResource(R.drawable.java);
 
@@ -91,15 +111,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
        }
 
 
-
-
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
