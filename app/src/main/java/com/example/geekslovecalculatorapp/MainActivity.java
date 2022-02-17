@@ -63,8 +63,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tableLayout.addView(tableRow);
         String text = s.getSelectedItem().toString();
         language.setText(text);
-
+        tableRow.addView(language);
         love_percentage.setText(answer);
+        tableRow.addView(love_percentage);
 
 
 
